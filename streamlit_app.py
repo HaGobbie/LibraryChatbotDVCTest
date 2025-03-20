@@ -2,11 +2,10 @@ import streamlit as st
 import google.generativeai as genai
 
 # Show title and description.
-st.title("💬 Gemini Chatbot")
+st.title("💬 DVC Library Chatbot")
 st.write(
     "This is a simple chatbot that uses Google's Gemini AI model to generate responses. "
-    "To use this app, you need to provide a Google API key. "
-    "You can get an API key from [Google AI](https://aistudio.google.com/) and follow their documentation."
+    "Use this chatbot to find your recommended books"
 )
 
 # Stores the API Key for use.
