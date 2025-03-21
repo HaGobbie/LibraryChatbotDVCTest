@@ -1,6 +1,33 @@
 import streamlit as st
 import google.generativeai as genai
 
+# Custom avatar image paths
+user_avatar = "images/user_avatar.png"  # Replace with your user avatar path
+assistant_avatar = "images/assistant_avatar.png"  # Replace with your assistant avatar path
+
+def display_message(message, role):
+    if role == "user":
+        avatar = user_avatar
+        alignment = "right"
+        bg_color = "#e0f7fa"  # Light blue for user
+    elif role == "assistant":
+        avatar = assistant_avatar
+        alignment = "left"
+        bg_color = "#f0f0f0"  # Light grey for assistant
+    else: # system message
+        return #dont display system message
+
+    # Custom HTML for message display with avatar
+    message_html = f"""
+    <div style="display: flex; align-items: flex-start; margin-bottom: 10px; flex-direction: {'row-reverse' if role == 'user' else 'row'};">
+        <img src="{avatar}" style="width: 40px; height: 40px; border-radius: 50%; margin: {'0 0 0 10px' if role != 'user' else '0 10px 0 0'};">
+        <div style="background-color: {bg_color}; padding: 10px; border-radius: 8px; max-width: 70%; text-align: {alignment};">
+            {message}
+        </div>
+    </div>
+    """
+    st.markdown(message_html, unsafe_allow_html=True)
+
 # Show title and description.
 st.title("💬 DVC Library Chatbot")
 st.write(
@@ -40,15 +67,13 @@ else:
     # Display the existing chat messages (excluding system instructions).
     for message in st.session_state.messages:
         if message["role"] != "system":
-            with st.chat_message(message["role"]):
-                st.markdown(message["content"])
+            display_message(message["content"], message["role"]) # modified to use custom display
     
     # Create a chat input field.
     if prompt := st.chat_input("Tell me what kind of books you like!"):
         # Store and display the current prompt.
         st.session_state.messages.append({"role": "user", "content": prompt})
-        with st.chat_message("user"):
-            st.markdown(prompt)
+        display_message(prompt, "user") # modified to use custom display
         
         # Generate a response using Gemini AI.
         full_conversation = system_instruction + st.session_state.messages
@@ -58,6 +83,5 @@ else:
         reply = response.text if response and hasattr(response, 'text') else "(No response)"
         
         # Display response and store in session state.
-        with st.chat_message("assistant"):
-            st.markdown(reply)
+        display_message(reply, "assistant") # modified to use custom display
         st.session_state.messages.append({"role": "assistant", "content": reply})
