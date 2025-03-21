@@ -12,6 +12,20 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 user_avatar = image_to_base64(os.path.join(current_dir, "static/user_avatar.png"))
 assistant_avatar = image_to_base64(os.path.join(current_dir, "static/assistant_avatar.png"))
 
+# Add background image CSS
+st.markdown(
+    """
+    <style>
+    body {
+        background-image: url("static/library_background_image.png"); # Replace with your image path
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
 def display_message(message, role):
     if role == "user":
         avatar = user_avatar
