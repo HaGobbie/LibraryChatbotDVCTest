@@ -16,10 +16,11 @@ assistant_avatar = image_to_base64(os.path.join(current_dir, "static/assistant_a
 st.markdown(
     """
     <style>
-    body {
-        background-image: url("static/library_background_image.png"); # Replace with your image path
+    .stApp {
+        background-image: url("static/library_background_.png");
         background-size: cover;
         background-repeat: no-repeat;
+        !important;
     }
     </style>
     """,
