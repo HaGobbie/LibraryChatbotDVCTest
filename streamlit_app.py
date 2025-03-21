@@ -16,11 +16,9 @@ def display_message(message, role):
     if role == "user":
         avatar = user_avatar
         alignment = "right"
-        bg_color = "#e0f7fa"  # Light blue for user
     elif role == "assistant":
         avatar = assistant_avatar
         alignment = "left"
-        bg_color = "#f0f0f0"  # Light grey for assistant
     else:
         return
 
