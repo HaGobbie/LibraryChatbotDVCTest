@@ -20,6 +20,17 @@ else:
     # Create a session state variable to store the chat messages.
     if "messages" not in st.session_state:
         st.session_state.messages = []
+
+    # Initial system instruction to guide chatbot behavior.
+    system_instruction = (
+        "You are a chatbot that helps users find book recommendations. "
+        "Greet the user warmly and introduce yourself as a book recommendation assistant. "
+        "Start by asking the user what kind of books they are interested in. "
+        "Ensure the conversation remains focused on book recommendations and do not stray too far from this topic."
+    )
+    
+    if not st.session_state.messages:
+        st.session_state.messages.append({"role": "assistant", "content": system_instruction})
     
     # Display the existing chat messages.
     for message in st.session_state.messages:
