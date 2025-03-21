@@ -25,12 +25,10 @@ def display_message(message, role):
         return
 
     message_html = f"""
-    <div style="display: flex; align-items: flex-start; margin-bottom: 10px; flex-direction: {'row-reverse' if role == 'user' else 'row'};">
+    style="display: flex; align-items: flex-start; margin-bottom: 10px; flex-direction: {'row-reverse' if role == 'user' else 'row'};">
         <img src="{avatar}" style="width: 40px; height: 40px; border-radius: 50%; margin: {'0 0 0 10px' if role != 'user' else '0 10px 0 0'};">
         <div style="background-color: {bg_color}; padding: 10px; border-radius: 8px; max-width: 70%; text-align: {alignment}; color: black;">
             {message}
-        </div>
-    </div>
     """
     st.markdown(message_html, unsafe_allow_html=True)
 
