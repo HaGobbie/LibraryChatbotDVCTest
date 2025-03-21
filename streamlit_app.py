@@ -2,8 +2,8 @@ import streamlit as st
 import google.generativeai as genai
 
 # Custom avatar image paths
-user_avatar = "images/user_avatar.png"  # Replace with your user avatar path
-assistant_avatar = "images/assistant_avatar.png"  # Replace with your assistant avatar path
+user_avatar = "LibraryChatbotDVCTest/images/user_avatar.png"  # Replace with your user avatar path
+assistant_avatar = "LibraryChatbotDVCTest/images/assistant_avatar.png"  # Replace with your assistant avatar path
 
 def display_message(message, role):
     if role == "user":
@@ -19,13 +19,9 @@ def display_message(message, role):
 
     # Custom HTML for message display with avatar
     message_html = f"""
-    <div style="display: flex; align-items: flex-start; margin-bottom: 10px; flex-direction: {'row-reverse' if role == 'user' else 'row'};">
-        <img src="{avatar}" style="width: 40px; height: 40px; border-radius: 50%; margin: {'0 0 0 10px' if role != 'user' else '0 10px 0 0'};">
-        <div style="background-color: {bg_color}; padding: 10px; border-radius: 8px; max-width: 70%; text-align: {alignment};">
-            {message}
-        </div>
-    </div>
-    """
+<img src="{avatar}" style="width: 40px; height: 40px;">
+<div>{message}</div>
+"""
     st.markdown(message_html, unsafe_allow_html=True)
 
 # Show title and description.
