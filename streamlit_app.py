@@ -21,7 +21,7 @@ else:
     if "messages" not in st.session_state:
         st.session_state.messages = []
 
-    # Initial system instruction to guide chatbot behavior.
+     # Initial system instruction to guide chatbot behavior.
     system_instruction = (
         "You are a chatbot that helps users find book recommendations. "
         "Greet the user warmly and introduce yourself as a book recommendation assistant. "
@@ -38,7 +38,7 @@ else:
             st.markdown(message["content"])
     
     # Create a chat input field.
-    if prompt := st.chat_input("What is up?"):
+    if prompt := st.chat_input("Tell me what kind of books you like!"):
         # Store and display the current prompt.
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
