@@ -17,15 +17,15 @@ st.markdown(
     f"""
     <style>
     .stApp {{
-        background-image: url('{background_image}');
-        background-size: cover;
-        background-repeat: no-repeat;
+        background-image: url('{background_image}') !important;
+        background-size: cover !important;
+        background-repeat: no-repeat !important;
     }}
     main {{
-        background-color: transparent;
+        background-color: transparent !important;
     }}
-    .stApp div[data-testid="stVerticalBlock"] {{
-        background-color: transparent;
+    .stApp div {{
+        background-color: transparent !important;
     }}
     </style>
     """,
