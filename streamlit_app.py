@@ -21,21 +21,25 @@ else:
     if "messages" not in st.session_state:
         st.session_state.messages = []
 
-     # Initial system instruction to guide chatbot behavior.
-    system_instruction = (
-        "You are a chatbot that helps users find book recommendations. "
-        "Greet the user warmly and introduce yourself as a book recommendation assistant. "
-        "Start by asking the user what kind of books they are interested in. "
-        "Ensure the conversation remains focused on book recommendations and do not stray too far from this topic."
-    )
+    # Define system instructions for the chatbot.
+    system_instruction = [
+        {"role": "system", "content": (
+            "You are a chatbot designed to recommend books based on user preferences. "
+            "Greet the user warmly and introduce yourself as a book recommendation assistant. "
+            "Start by asking the user about their favorite genres, authors, or book preferences. "
+            "Ensure that the conversation remains focused on book recommendations and do not stray too far from this topic."
+        )}
+    ]
     
+    # If it's the first interaction, initialize with system instruction.
     if not st.session_state.messages:
-        st.session_state.messages.append({"role": "assistant", "content": system_instruction})
+        st.session_state.messages.extend(system_instruction)
     
-    # Display the existing chat messages.
+    # Display the existing chat messages (excluding system instructions).
     for message in st.session_state.messages:
-        with st.chat_message(message["role"]):
-            st.markdown(message["content"])
+        if message["role"] != "system":
+            with st.chat_message(message["role"]):
+                st.markdown(message["content"])
     
     # Create a chat input field.
     if prompt := st.chat_input("Tell me what kind of books you like!"):
@@ -45,7 +49,10 @@ else:
             st.markdown(prompt)
         
         # Generate a response using Gemini AI.
-        response = client.generate_content(prompt)
+        full_conversation = system_instruction + st.session_state.messages
+        response = client.generate_content(
+            [m["content"] for m in full_conversation]
+        )
         reply = response.text if response and hasattr(response, 'text') else "(No response)"
         
         # Display response and store in session state.
