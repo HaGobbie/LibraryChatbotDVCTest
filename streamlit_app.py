@@ -6,11 +6,25 @@ import os
 def image_to_base64(image_path):
     with open(image_path, "rb") as image_file:
         encoded_string = base64.b64encode(image_file.read()).decode()
-        return f"data:image/png;base64,{encoded_string}"
+        return f"data:image/jpeg;base64,{encoded_string}" #Change image/jpeg to what the image is.
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
+background_image = image_to_base64(os.path.join(current_dir, "static/library_background.png")) #Change file name.
 user_avatar = image_to_base64(os.path.join(current_dir, "static/user_avatar.png"))
 assistant_avatar = image_to_base64(os.path.join(current_dir, "static/assistant_avatar.png"))
+
+st.markdown(
+    f"""
+    <style>
+    .stApp {{
+        background-image: url('{background_image}');
+        background-size: cover;
+        background-repeat: no-repeat;
+    }}
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 
 def display_message(message, role):
     if role == "user":
