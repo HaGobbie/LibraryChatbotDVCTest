@@ -55,6 +55,9 @@ st.write(
 
 # Stores the API Key for use.
 google_api_key = "AIzaSyDV3Xu4PLlViR37wg4WQViNzcFHQQxrYdE"
+if not google_api_key:
+    st.info("Please add your Google API key to continue.", icon="🗝️")
+else:
     # Create a Google Gemini AI client.
     client = genai.GenerativeModel("gemini-2.0-flash")
     genai.configure(api_key=google_api_key)
