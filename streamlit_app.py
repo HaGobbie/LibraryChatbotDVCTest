@@ -29,6 +29,7 @@ def display_message(message, role):
         <img src="{avatar}" style="width: 40px; height: 40px; border-radius: 50%; margin: {'0 0 0 10px' if role != 'user' else '0 10px 0 0'};">
         <div style="background-color: {bg_color}; padding: 10px; border-radius: 8px; text-align: {alignment}; color: black; margin-left: 10px; margin-right: 10px; padding: 10px; width: fit-content;">
             {message}
+    <div>
     """
     st.markdown(message_html, unsafe_allow_html=True)
 
