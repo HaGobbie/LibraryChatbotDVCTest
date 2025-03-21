@@ -21,6 +21,12 @@ st.markdown(
         background-size: cover;
         background-repeat: no-repeat;
     }}
+    main {{
+        background-color: transparent;
+    }}
+    .stApp div[data-testid="stVerticalBlock"] {{
+        background-color: transparent;
+    }}
     </style>
     """,
     unsafe_allow_html=True,
