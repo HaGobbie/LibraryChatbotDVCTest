@@ -21,13 +21,16 @@ def display_message(message, role):
         avatar = assistant_avatar
         alignment = "left"
         bg_color = "#f0f0f0"  # Light grey for assistant
-    else: # system message
-        return #dont display system message
+    else:
+        return
 
-    # Custom HTML for message display with avatar
     message_html = f"""
-    <img src="{avatar}" style="width: 40px; height: 40px;">
-    <div>{message}</div>
+    <div style="display: flex; align-items: flex-start; margin-bottom: 10px; flex-direction: {'row-reverse' if role == 'user' else 'row'};">
+        <img src="{avatar}" style="width: 40px; height: 40px; border-radius: 50%; margin: {'0 0 0 10px' if role != 'user' else '0 10px 0 0'};">
+        <div style="background-color: {bg_color}; padding: 10px; border-radius: 8px; max-width: 70%; text-align: {alignment};">
+            {message}
+        </div>
+    </div>
     """
     st.markdown(message_html, unsafe_allow_html=True)
 
