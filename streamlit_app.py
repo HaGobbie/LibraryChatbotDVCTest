@@ -1,9 +1,16 @@
 import streamlit as st
 import google.generativeai as genai
+import base64
+import os
 
-# Custom avatar image paths
-user_avatar = "/static/user_avatar.png"  # Replace with your user avatar path
-assistant_avatar = "/static/assistant_avatar.png"  # Replace with your assistant avatar path
+def image_to_base64(image_path):
+    with open(image_path, "rb") as image_file:
+        encoded_string = base64.b64encode(image_file.read()).decode()
+        return f"data:image/png;base64,{encoded_string}"
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+user_avatar = image_to_base64(os.path.join(current_dir, "static/user_avatar.png"))
+assistant_avatar = image_to_base64(os.path.join(current_dir, "static/assistant_avatar.png"))
 
 def display_message(message, role):
     if role == "user":
