@@ -2,8 +2,8 @@ import streamlit as st
 import google.generativeai as genai
 
 # Custom avatar image paths
-user_avatar = "LibraryChatbotDVCTest/images/user_avatar.png"  # Replace with your user avatar path
-assistant_avatar = "LibraryChatbotDVCTest/images/assistant_avatar.png"  # Replace with your assistant avatar path
+user_avatar = "static/user_avatar.png"  # Replace with your user avatar path
+assistant_avatar = "static/assistant_avatar.png"  # Replace with your assistant avatar path
 
 def display_message(message, role):
     if role == "user":
