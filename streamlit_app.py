@@ -100,6 +100,7 @@ else:
         "Maintain a helpful and conversational tone throughout the interaction. "
         "Provide direct and concise responses based solely on the user's current input. "
         "Use <strong> tags for bold text. Do NOT use any other form of formatting, including asterisks."
+        "If you encounter difficulties understanding the user, provide a concise response and avoid repeating phrases. "
         "Do not create internal dialogues or talk to yourself."
         )}] + st.session_state.messages
         response = client.generate_content([m["content"] for m in full_conversation])
