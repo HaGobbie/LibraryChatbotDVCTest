@@ -39,24 +39,13 @@ def display_message(message, role):
         label = "Chatbot"
     else:
         return
-    message_container_start = f"""
-    <div style="display: flex; flex-direction: {'row-reverse' if role == 'user' else 'row'}; align-items: flex-start; margin-bottom: 5px;">
-        <div style="display: flex; flex-direction: column; align-items: {'flex-start' if role == 'user' else 'flex-end'};">
-            <div style="font-size: 12px; color: white; text-align: {'right' if role == 'user' else 'left'};">
-                {label}
-            </div>
-            <div style="background-color: {bg_color}; padding: 10px; border-radius: 8px; max-width: 70%; text-align: {alignment}; color: black; margin-top: 5px;">
-                {message}
-            </div>
-        </div>
+    message_html = f"""
+    <div style="display: flex; align-items: flex-start; margin-bottom: 5px; flex-direction: {'row-reverse' if role == 'user' else 'row'};">
+        <img src="{avatar}" style="width: 40px; height: 40px; border-radius: 50%; margin: {'0 0 0 10px' if role != 'user' else '0 10px 0 0'};">
+        <div style="background-color: {bg_color}; padding: 10px; border-radius: 8px; max-width: 70%; text-align: {alignment}; color: black; margin-left: 10px; margin-right: 10px;">
+            {message}
     """
-
-    avatar_html = f"""
-    <img src="{avatar}" style="width: 40px; height: 40px; border-radius: 50%; margin: {'0 0 0 10px' if role == 'user' else '0 10px 0 0'};">
-    </div>
-    """
-
-    st.markdown(message_container_start + avatar_html, unsafe_allow_html=True)
+    st.markdown(message_html, unsafe_allow_html=True)
 
 # Show title and description.
 st.title("💬 DVC Library Chatbot")
