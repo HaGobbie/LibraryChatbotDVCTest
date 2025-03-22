@@ -75,7 +75,7 @@ else:
         "If the user asks about something unrelated to books, politely acknowledge their question and provide a brief response if possible. "
         "If you cannot provide a direct answer, offer alternative resources or suggest related topics. "
         "Maintain a helpful and conversational tone throughout the interaction. "
-    )}
+    )}]
         )}]
         response = client.generate_content([m["content"] for m in full_conversation])
         reply = response.text if response and hasattr(response, 'text') else "(No response)"
