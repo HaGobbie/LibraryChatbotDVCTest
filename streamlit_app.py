@@ -66,10 +66,9 @@ else:
     if "messages" not in st.session_state:
         st.session_state.messages = []
         st.session_state.messages.append({"role": "user", "content": "Hello!"}) #Add Hello as first message.
-
-    # Define system instructions for the chatbot.
-    system_instruction = [
-        {"role": "system", "content": (
+        
+        # Generate a response to the "Hello!" message.
+        full_conversation = [{"role": "system", "content": (
             "You are a helpful and professional book recommendation assistant for Davao Vision Colleges Library. "
             "Your sole purpose is to help users find books based on their preferences. "
             "Greet the user warmly and introduce yourself, then ask about their favorite genres, authors, or book preferences. "
@@ -80,16 +79,15 @@ else:
             "If the user asks about something unrelated to books, politely remind them of your purpose. "
             "If you recommend a search query, keep it extremely concise and focused. "
             "Maintain a professional and helpful tone throughout the conversation."
-        )}
-    ]
-
-    # If it's the first interaction, initialize with system instruction.
-    if len(st.session_state.messages) == 1:
-        st.session_state.messages.extend(system_instruction)
+        )}, {"role": "user", "content": "Hello!"}]
+        response = client.generate_content([m["content"] for m in full_conversation])
+        reply = response.text if response and hasattr(response, 'text') else "(No response)"
         
+        st.session_state.messages.append({"role": "assistant", "content": reply}) #Add response to messages.
+
     # Display the existing chat messages (excluding system instructions).
     for message in st.session_state.messages:
-        if message["role"] != "system" and message["content"] != "Hello!": #Dont display the hello message.
+        if message["role"] != "system":
             display_message(message["content"], message["role"])
             
     # Create a chat input field.
@@ -99,10 +97,19 @@ else:
         display_message(prompt, "user")
         
         # Generate a response using Gemini AI.
-        full_conversation = system_instruction + st.session_state.messages
-        response = client.generate_content(
-            [m["content"] for m in full_conversation]
-        )
+        full_conversation = [{"role": "system", "content": (
+            "You are a helpful and professional book recommendation assistant for Davao Vision Colleges Library. "
+            "Your sole purpose is to help users find books based on their preferences. "
+            "Greet the user warmly and introduce yourself, then ask about their favorite genres, authors, or book preferences. "
+            "Respond to user inquiries with concise and relevant book recommendations. "
+            "Do not introduce new topics or engage in self-dialogue. "
+            "Do not ask or answer your own questions. "
+            "Do not generate sentences like 'Okay, let's...' or 'What about...'. "
+            "If the user asks about something unrelated to books, politely remind them of your purpose. "
+            "If you recommend a search query, keep it extremely concise and focused. "
+            "Maintain a professional and helpful tone throughout the conversation."
+        )}] + st.session_state.messages
+        response = client.generate_content([m["content"] for m in full_conversation])
         reply = response.text if response and hasattr(response, 'text') else "(No response)"
         
         # Display response and store in session state.
