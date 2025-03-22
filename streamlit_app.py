@@ -44,7 +44,6 @@ def display_message(message, role):
         <div style="display: flex; flex-direction: column; align-items: {'flex-start' if role == 'user' else 'flex-end'};">
             <div style="font-size: 12px; color: white; text-align: {'right' if role == 'user' else 'left'};">
                 {label}
-            </div>
             <div style="background-color: {bg_color}; padding: 10px; border-radius: 8px; max-width: 70%; text-align: {alignment}; color: black; margin-top: 5px;">
                 {message}
             </div>
