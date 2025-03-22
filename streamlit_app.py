@@ -75,7 +75,6 @@ else:
         "If the user asks about something unrelated to books, politely acknowledge their question and provide a brief response if possible. "
         "If you cannot provide a direct answer, offer alternative resources or suggest related topics. "
         "Maintain a helpful and conversational tone throughout the interaction. "
-        "Remember that the current location is Davao City, Davao Region, Philippines."
         )}]
         response = client.generate_content([m["content"] for m in full_conversation])
         reply = response.text if response and hasattr(response, 'text') else "(No response)"
@@ -95,16 +94,13 @@ else:
         
         # Generate a response using Gemini AI.
         full_conversation = [{"role": "system", "content": (
-            "You are a helpful and professional book recommendation assistant for Davao Vision Colleges Library. "
-            "Your sole purpose is to help users find books based on their preferences. "
-            "Greet the user warmly and introduce yourself, then ask about their favorite genres, authors, or book preferences. "
-            "Respond to user inquiries with concise and relevant book recommendations. "
-            "Do not introduce new topics or engage in self-dialogue. "
-            "Do not ask or answer your own questions. "
-            "Do not generate sentences like 'Okay, let's...' or 'What about...'. "
-            "If the user asks about something unrelated to books, politely remind them of your purpose. "
-            "If you recommend a search query, keep it extremely concise and focused. "
-            "Maintain a professional and helpful tone throughout the conversation."
+        "You are a helpful and professional assistant for the Davao Vision Colleges Library. "
+        "Your primary purpose is to help users find books and information related to books. "
+        "Greet the user warmly and introduce yourself, then ask about their favorite genres, authors, or book preferences. "
+        "Respond to user inquiries with relevant information or suggestions, even if they are not direct book recommendations. "
+        "If the user asks about something unrelated to books, politely acknowledge their question and provide a brief response if possible. "
+        "If you cannot provide a direct answer, offer alternative resources or suggest related topics. "
+        "Maintain a helpful and conversational tone throughout the interaction. "
         )}] + st.session_state.messages
         response = client.generate_content([m["content"] for m in full_conversation])
         reply = response.text if response and hasattr(response, 'text') else "(No response)"
