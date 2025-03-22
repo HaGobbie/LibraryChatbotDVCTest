@@ -86,24 +86,24 @@ system_instruction = [
 if not st.session_state.messages:  # Corrected indentation here
     st.session_state.messages.extend(system_instruction)
     
-    # Display the existing chat messages (excluding system instructions).
-    for message in st.session_state.messages:
-        if message["role"] != "system":
-            display_message(message["content"], message["role"]) # modified to use custom display
+# Display the existing chat messages (excluding system instructions).
+for message in st.session_state.messages:
+    if message["role"] != "system":
+        display_message(message["content"], message["role"]) # modified to use custom display
     
-    # Create a chat input field.
-    if prompt := st.chat_input("Tell me what kind of books you like!"):
-        # Store and display the current prompt.
-        st.session_state.messages.append({"role": "user", "content": prompt})
-        display_message(prompt, "user") # modified to use custom display
+# Create a chat input field.
+if prompt := st.chat_input("Tell me what kind of books you like!"):
+    # Store and display the current prompt.
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    display_message(prompt, "user") # modified to use custom display
         
-        # Generate a response using Gemini AI.
-        full_conversation = system_instruction + st.session_state.messages
-        response = client.generate_content(
-            [m["content"] for m in full_conversation]
-        )
-        reply = response.text if response and hasattr(response, 'text') else "(No response)"
+    # Generate a response using Gemini AI.
+    full_conversation = system_instruction + st.session_state.messages
+    response = client.generate_content(
+        [m["content"] for m in full_conversation]
+    )
+    reply = response.text if response and hasattr(response, 'text') else "(No response)"
         
-        # Display response and store in session state.
-        display_message(reply, "assistant") # modified to use custom display
-        st.session_state.messages.append({"role": "assistant", "content": reply})
+    # Display response and store in session state.
+    display_message(reply, "assistant") # modified to use custom display
+    st.session_state.messages.append({"role": "assistant", "content": reply})
