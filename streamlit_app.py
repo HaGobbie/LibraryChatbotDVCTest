@@ -65,9 +65,8 @@ else:
     # Create a session state variable to store the chat messages.
     if "messages" not in st.session_state:
         st.session_state.messages = []
-        st.session_state.messages.append({"role": "user", "content": "Hello!"}) #Add Hello as first message.
         
-        # Generate a response to the "Hello!" message.
+        # Generate the greeting as the first message
         full_conversation = [{"role": "system", "content": (
             "You are a helpful and professional book recommendation assistant for Davao Vision Colleges Library. "
             "Your sole purpose is to help users find books based on their preferences. "
@@ -79,7 +78,7 @@ else:
             "If the user asks about something unrelated to books, politely remind them of your purpose. "
             "If you recommend a search query, keep it extremely concise and focused. "
             "Maintain a professional and helpful tone throughout the conversation."
-        )}, {"role": "user", "content": "Hello!"}]
+        )}]
         response = client.generate_content([m["content"] for m in full_conversation])
         reply = response.text if response and hasattr(response, 'text') else "(No response)"
         
