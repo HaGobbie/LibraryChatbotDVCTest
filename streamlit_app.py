@@ -6,10 +6,10 @@ import os
 def image_to_base64(image_path):
     with open(image_path, "rb") as image_file:
         encoded_string = base64.b64encode(image_file.read()).decode()
-        return f"data:image/jpeg;base64,{encoded_string}" #Change image/jpeg to what the image is.
+        return f"data:image/jpeg;base64,{encoded_string}"
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
-background_image = image_to_base64(os.path.join(current_dir, "static/library_background.png")) #Change file name.
+background_image = image_to_base64(os.path.join(current_dir, "static/library_background.png"))
 user_avatar = image_to_base64(os.path.join(current_dir, "static/user_avatar.png"))
 assistant_avatar = image_to_base64(os.path.join(current_dir, "static/assistant_avatar.png"))
 
@@ -54,7 +54,7 @@ st.write(
 )
 
 # Stores the API Key for use.
-google_api_key = "AIzaSyDV3Xu4PLlViR37wg4WQViNzcFHQQxrYdE"
+google_api_key = "YOUR_GOOGLE_API_KEY"
 if not google_api_key:
     st.info("Please add your Google API key to continue.", icon="🗝️")
 else:
@@ -65,45 +65,46 @@ else:
     # Create a session state variable to store the chat messages.
     if "messages" not in st.session_state:
         st.session_state.messages = []
+        st.session_state.messages.append({"role": "user", "content": "Hello!"}) #Add Hello as first message.
 
     # Define system instructions for the chatbot.
-system_instruction = [
-    {"role": "system", "content": (
-        "You are a helpful and professional book recommendation assistant for Davao Vision Colleges Library. "
-        "Your sole purpose is to help users find books based on their preferences. "
-        "Greet the user warmly and introduce yourself, then ask about their favorite genres, authors, or book preferences. "
-        "Respond to user inquiries with concise and relevant book recommendations. "
-        "Do not introduce new topics or engage in self-dialogue. "
-        "Do not ask or answer your own questions. "
-        "Do not generate sentences like 'Okay, let's...' or 'What about...'. "
-        "If the user asks about something unrelated to books, politely remind them of your purpose. "
-        "If you recommend a search query, keep it extremely concise and focused. "
-        "Maintain a professional and helpful tone throughout the conversation."
-    )}
-]
+    system_instruction = [
+        {"role": "system", "content": (
+            "You are a helpful and professional book recommendation assistant for Davao Vision Colleges Library. "
+            "Your sole purpose is to help users find books based on their preferences. "
+            "Greet the user warmly and introduce yourself, then ask about their favorite genres, authors, or book preferences. "
+            "Respond to user inquiries with concise and relevant book recommendations. "
+            "Do not introduce new topics or engage in self-dialogue. "
+            "Do not ask or answer your own questions. "
+            "Do not generate sentences like 'Okay, let's...' or 'What about...'. "
+            "If the user asks about something unrelated to books, politely remind them of your purpose. "
+            "If you recommend a search query, keep it extremely concise and focused. "
+            "Maintain a professional and helpful tone throughout the conversation."
+        )}
+    ]
 
-# If it's the first interaction, initialize with system instruction.
-if not st.session_state.messages:  # Corrected indentation here
-    st.session_state.messages.extend(system_instruction)
-    
-# Display the existing chat messages (excluding system instructions).
-for message in st.session_state.messages:
-    if message["role"] != "system":
-        display_message(message["content"], message["role"]) # modified to use custom display
-    
-# Create a chat input field.
-if prompt := st.chat_input("Tell me what kind of books you like!"):
-    # Store and display the current prompt.
-    st.session_state.messages.append({"role": "user", "content": prompt})
-    display_message(prompt, "user") # modified to use custom display
+    # If it's the first interaction, initialize with system instruction.
+    if len(st.session_state.messages) == 1:
+        st.session_state.messages.extend(system_instruction)
         
-    # Generate a response using Gemini AI.
-    full_conversation = system_instruction + st.session_state.messages
-    response = client.generate_content(
-        [m["content"] for m in full_conversation]
-    )
-    reply = response.text if response and hasattr(response, 'text') else "(No response)"
+    # Display the existing chat messages (excluding system instructions).
+    for message in st.session_state.messages:
+        if message["role"] != "system" and message["content"] != "Hello!": #Dont display the hello message.
+            display_message(message["content"], message["role"])
+            
+    # Create a chat input field.
+    if prompt := st.chat_input("Tell me what kind of books you like!"):
+        # Store and display the current prompt.
+        st.session_state.messages.append({"role": "user", "content": prompt})
+        display_message(prompt, "user")
         
-    # Display response and store in session state.
-    display_message(reply, "assistant") # modified to use custom display
-    st.session_state.messages.append({"role": "assistant", "content": reply})
+        # Generate a response using Gemini AI.
+        full_conversation = system_instruction + st.session_state.messages
+        response = client.generate_content(
+            [m["content"] for m in full_conversation]
+        )
+        reply = response.text if response and hasattr(response, 'text') else "(No response)"
+        
+        # Display response and store in session state.
+        display_message(reply, "assistant")
+        st.session_state.messages.append({"role": "assistant", "content": reply})
