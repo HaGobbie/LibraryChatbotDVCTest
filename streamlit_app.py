@@ -39,7 +39,7 @@ def display_message(message, role):
         label = "Chatbot"
     else:
         return
-    message_html = f"""
+    message_container_start = f"""
     <div style="display: flex; flex-direction: {'row-reverse' if role == 'user' else 'row'}; align-items: flex-start; margin-bottom: 5px;">
         <div style="display: flex; flex-direction: column; align-items: {'flex-start' if role == 'user' else 'flex-end'};">
             <div style="font-size: 12px; color: white; text-align: {'right' if role == 'user' else 'left'};">
@@ -49,9 +49,14 @@ def display_message(message, role):
                 {message}
             </div>
         </div>
-        <img src="{avatar}" style="width: 40px; height: 40px; border-radius: 50%; margin: {'0 0 0 10px' if role == 'user' else '0 10px 0 0'};">
     """
-    st.markdown(message_html, unsafe_allow_html=True)
+
+    avatar_html = f"""
+    <img src="{avatar}" style="width: 40px; height: 40px; border-radius: 50%; margin: {'0 0 0 10px' if role == 'user' else '0 10px 0 0'};">
+    </div>
+    """
+
+    st.markdown(message_container_start + avatar_html, unsafe_allow_html=True)
 
 # Show title and description.
 st.title("💬 DVC Library Chatbot")
