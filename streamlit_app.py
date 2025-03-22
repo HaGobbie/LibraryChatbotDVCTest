@@ -54,7 +54,7 @@ st.write(
 )
 
 # Stores the API Key for use.
-google_api_key = "YOUR_GOOGLE_API_KEY"
+google_api_key = "AIzaSyDV3Xu4PLlViR37wg4WQViNzcFHQQxrYdE"
 if not google_api_key:
     st.info("Please add your Google API key to continue.", icon="🗝️")
 else:
