@@ -76,6 +76,9 @@ else:
         "If the user asks about something unrelated to books, politely acknowledge their question and provide a brief response if possible. "
         "If you cannot provide a direct answer, offer alternative resources or suggest related topics. "
         "Maintain a helpful and conversational tone throughout the interaction. "
+        "Provide direct and concise responses based solely on the user's current input. "
+        "Do not refer to previous turns or instructions in your responses. "
+        "Do not create internal dialogues or talk to yourself."
         )}]
         response = client.generate_content([m["content"] for m in full_conversation])
         reply = response.text if response and hasattr(response, 'text') else "(No response)"
@@ -103,6 +106,9 @@ else:
         "If the user asks about something unrelated to books, politely acknowledge their question and provide a brief response if possible. "
         "If you cannot provide a direct answer, offer alternative resources or suggest related topics. "
         "Maintain a helpful and conversational tone throughout the interaction. "
+        "Provide direct and concise responses based solely on the user's current input. "
+        "Do not refer to previous turns or instructions in your responses. "
+        "Do not create internal dialogues or talk to yourself."
         )}] + st.session_state.messages
         response = client.generate_content([m["content"] for m in full_conversation])
         reply = response.text if response and hasattr(response, 'text') else "(No response)"
