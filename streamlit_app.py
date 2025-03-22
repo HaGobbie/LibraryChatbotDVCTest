@@ -40,12 +40,13 @@ def display_message(message, role):
     else:
         return
     message_html = f"""
-    <div style="display: flex; flex-direction: column; align-items: {'flex-end' if role == 'assistant' else 'flex-start'};">  # Overall alignment
-        <div style="display: flex; align-items: center; justify-content: {'flex-end' if role == 'assistant' else 'flex-start'};">  # Avatar and label container
+    <div style="display: flex; flex-direction: column; align-items: {'flex-end' if role == 'assistant' else 'flex-start'};">
+        <div style="display: flex; align-items: center; justify-content: {'flex-end' if role == 'assistant' else 'flex-start'};">
             <div style="font-size: 12px; color: white; margin: {'0 10px 0 0' if role == 'assistant' else '0 0 0 10px'};">
                 {label}
             <img src="{avatar}" style="width: 40px; height: 40px; border-radius: 50%;">
-        <div style="background-color: {bg_color}; padding: 10px; border-radius: 8px; max-width: 70%; text-align: {alignment}; color: white; margin-top: 5px;">
+        </div>
+        <div style="background-color: {bg_color}; padding: 10px; border-radius: 8px; max-width: 70%; text-align: {alignment}; color: black; margin-top: 5px;">
             {message}
     """
     st.markdown(message_html, unsafe_allow_html=True)
