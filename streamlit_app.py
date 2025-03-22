@@ -44,8 +44,7 @@ def display_message(message, role):
     <div style="display: flex; align-items: flex-start; margin-bottom: 5px; flex-direction: {'row-reverse' if role == 'user' else 'row'};">
         <div style="display: flex; flex-direction: column; align-items: {'flex-end' if role == 'user' else 'flex-start'};">  # Adjusted alignment
             <img src="{avatar}" style="width: 40px; height: 40px; border-radius: 50%; margin: {'0 0 0 10px' if role != 'user' else '0 10px 0 0'};">
-            <div style="font-size: 12px; color: gray;">{label}</div>
-        </div>
+            <div style="font-size: 12px; color: gray;">{label}
         <div style="background-color: {bg_color}; padding: 10px; border-radius: 8px; max-width: 70%; text-align: {alignment}; color: black; margin-left: 10px; margin-right: 10px;">
             {message}
     """
