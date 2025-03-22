@@ -39,6 +39,7 @@ def display_message(message, role):
         label = "Chatbot"
     else:
         return
+
     message_html = f"""
     <div style="display: flex; flex-direction: {'row-reverse' if role == 'user' else 'row'}; align-items: flex-start; margin-bottom: 5px;">
         <div style="display: flex; flex-direction: column; align-items: {'flex-start' if role == 'user' else 'flex-end'};">
@@ -46,8 +47,10 @@ def display_message(message, role):
                 {label}
             <div style="background-color: {bg_color}; padding: 10px; border-radius: 8px; max-width: 70%; text-align: {alignment}; color: black; margin-top: 5px;">
                 {message}
+            </div>
         </div>
         <img src="{avatar}" style="width: 40px; height: 40px; border-radius: 50%; margin: {'0 0 0 10px' if role == 'user' else '0 10px 0 0'};">
+    </div>
     """
     st.markdown(message_html, unsafe_allow_html=True)
 
