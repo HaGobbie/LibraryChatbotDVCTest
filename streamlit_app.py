@@ -77,7 +77,7 @@ else:
         "If you cannot provide a direct answer, offer alternative resources or suggest related topics. "
         "Maintain a helpful and conversational tone throughout the interaction. "
         "Provide direct and concise responses based solely on the user's current input. "
-        "Do not refer to previous turns or instructions in your responses. "
+        "The only text formatting you can do is making a text bold. "
         "Do not create internal dialogues or talk to yourself."
         )}]
         response = client.generate_content([m["content"] for m in full_conversation])
@@ -107,7 +107,7 @@ else:
         "If you cannot provide a direct answer, offer alternative resources or suggest related topics. "
         "Maintain a helpful and conversational tone throughout the interaction. "
         "Provide direct and concise responses based solely on the user's current input. "
-        "Do not refer to previous turns or instructions in your responses. "
+        "The only text formatting you can do is making a text bold. "
         "Do not create internal dialogues or talk to yourself."
         )}] + st.session_state.messages
         response = client.generate_content([m["content"] for m in full_conversation])
