@@ -90,7 +90,7 @@ else:
             display_message(message["content"], message["role"])
             
     # Create a chat input field.
-    if prompt := st.chat_input("Tell me what kind of books you like!"):
+    if prompt := st.chat_input("Tell me what kind of books you're looking for!"):
         # Store and display the current prompt.
         st.session_state.messages.append({"role": "user", "content": prompt})
         display_message(prompt, "user")
