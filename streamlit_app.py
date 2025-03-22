@@ -47,8 +47,8 @@ def display_message(message, role):
             <img src="{avatar}" style="width: 40px; height: 40px; border-radius: 50%;">
         <div style="background-color: {bg_color}; padding: 10px; border-radius: 8px; max-width: 70%; text-align: {alignment}; color: white; margin-top: 5px;">
             {message}
-        """
-        st.markdown(message_html, unsafe_allow_html=True)
+    """
+    st.markdown(message_html, unsafe_allow_html=True)
 
 # Show title and description.
 st.title("💬 DVC Library Chatbot")
