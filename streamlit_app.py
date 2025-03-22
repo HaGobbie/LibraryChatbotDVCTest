@@ -39,8 +39,6 @@ def display_message(message, role):
         label = "Chatbot"
     else:
         return
-
-    message_html = f"""
     message_html = f"""
     <div style="display: flex; flex-direction: column; align-items: {'flex-end' if role == 'assistant' else 'flex-start'};">  # Overall alignment
         <div style="display: flex; align-items: center; justify-content: {'flex-end' if role == 'assistant' else 'flex-start'};">  # Avatar and label container
