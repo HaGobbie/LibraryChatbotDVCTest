@@ -48,6 +48,7 @@ def display_message(message, role):
                 {label}
             <div style="background-color: {bg_color}; padding: 10px; border-radius: 8px; max-width: 70%; text-align: {alignment}; color: black; margin-top: 5px;">
                 {message}
+    """
     st.markdown(message_html, unsafe_allow_html=True)
 
 # Show title and description.
