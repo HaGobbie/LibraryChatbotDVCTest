@@ -81,10 +81,10 @@ system_instruction = [
         "Maintain a professional and helpful tone throughout the conversation."
     )}
 ]
-    
-    # If it's the first interaction, initialize with system instruction.
-    if not st.session_state.messages:
-        st.session_state.messages.extend(system_instruction)
+
+# If it's the first interaction, initialize with system instruction.
+if not st.session_state.messages:  # Corrected indentation here
+    st.session_state.messages.extend(system_instruction)
     
     # Display the existing chat messages (excluding system instructions).
     for message in st.session_state.messages:
