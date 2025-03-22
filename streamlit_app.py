@@ -76,7 +76,6 @@ else:
         "If you cannot provide a direct answer, offer alternative resources or suggest related topics. "
         "Maintain a helpful and conversational tone throughout the interaction. "
         "Remember that the current location is Davao City, Davao Region, Philippines."
-    )}]
         )}]
         response = client.generate_content([m["content"] for m in full_conversation])
         reply = response.text if response and hasattr(response, 'text') else "(No response)"
